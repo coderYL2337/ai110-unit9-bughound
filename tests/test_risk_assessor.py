@@ -46,3 +46,22 @@ def test_missing_return_is_penalized():
     )
     assert risk["score"] < 100
     assert any("Return" in r or "return" in r for r in risk["reasons"])
+
+
+def test_excessive_code_growth_is_penalized():
+    original = "def f():\n    return 1\n"
+    # Fixed code is more than 50% longer than original (2 lines -> 6 lines)
+    fixed = (
+        "import logging\n"
+        "import os\n\n"
+        "def f():\n"
+        "    logging.info('called')\n"
+        "    return 1\n"
+    )
+    risk = assess_risk(
+        original_code=original,
+        fixed_code=fixed,
+        issues=[{"type": "Code Quality", "severity": "Low", "msg": "minor"}],
+    )
+    assert risk["score"] < 100
+    assert any("longer" in r for r in risk["reasons"])

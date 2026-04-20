@@ -107,3 +107,9 @@ You should see tests covering:
 * Risk scoring and guardrails
 * Heuristic fallbacks when LLM output is invalid
 * End-to-end agent workflow shape
+
+---
+
+## Summary
+
+The core concept in this unit is understanding that LLM output is untrusted by default and must be validated before acting on it — the agent needs parsing, normalization, and compile-checks as guardrails between the model and any automated action. Students are most likely to struggle with the gap between the heuristic and Gemini paths: when the LLM is available, heuristic checks were originally skipped entirely, which meant reliable detections (like syntax errors via `compile()`) silently disappeared. AI was helpful for generating context-aware fixes and detecting nuanced issues that pattern matching cannot catch, but it was misleading when it returned empty results or echoed back broken code — the agent trusted it without verification. When guiding a stuck student,I would ask: "What happens to your `compile()` check when `_can_call_llm()` returns True?" — prompting them to trace the control flow and discover that the heuristic path is skipped, without directly revealing the merge-based solution.

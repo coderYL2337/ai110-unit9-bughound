@@ -1,6 +1,7 @@
 Analyze the following Python code and return a JSON array of issues.
 
 Focus on patterns such as:
+- indentation errors or inconsistent indentation (tabs vs spaces, wrong indent level)
 - bare except blocks
 - print statements in non-demo code
 - TODO comments

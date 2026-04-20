@@ -5,6 +5,7 @@ Your job is to identify potential problems in Python code that could affect:
 - maintainability
 - correctness
 - readability
+- indentation (tabs vs spaces, inconsistent indent levels, IndentationError)
 
 You must follow these rules:
 - Return ONLY valid JSON.
